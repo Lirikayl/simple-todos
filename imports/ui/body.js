@@ -3,6 +3,8 @@ import { Tasks } from '../api/tasks.js';
 import './body.html';
 import './task.js';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { Meteor } from 'meteor/meteor';
+
 Template.body.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
 });
@@ -35,6 +37,8 @@ Template.body.events({
     Tasks.insert({
       text,
       createdAt: new Date(), // current time
+	   owner: Meteor.userId(),
+      username: Meteor.user().username,
     });
  
     // Clear form
